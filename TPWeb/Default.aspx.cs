@@ -11,14 +11,18 @@ namespace TPWeb
 {
     public partial class Default : System.Web.UI.Page
     {
-        public  List<Articulo> ListaArticulos { get; set; }
+        public List<Articulo> ListaArticulos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             ListaArticulos = negocio.listar();
-            
-            repRepetidor.DataSource = ListaArticulos;
-            repRepetidor.DataBind();
+
+            if (!IsPostBack)
+            {
+                repRepetidor.DataSource = ListaArticulos;
+                repRepetidor.DataBind();
+            }
+
         }
     }
 }
